@@ -154,15 +154,15 @@ Para realizar este paso, levantamos una instancia de PostgreSQL utilizando Docke
 Este comando crea y ejecuta un contenedor basado en la imagen oficial postgres:16, asignándole el nombre blueprints-postgres. Se configuran variables de entorno para definir la contraseña del usuario administrador (blueprints123) y la base de datos inicial. El mapeo del puerto 5432 permite acceder a la base de datos desde el entorno local, mientras que el volumen postgres_data garantiza la persistencia de la información almacenada. La opción -d ejecuta el contenedor en segundo plano. Con esta configuración se dispone de una instancia de PostgreSQL operativa en entorno local.  
 
 <div align="center">
-  <img src="img/DockerInicio" alt="DockerInicio" style="max-width: 400px; display: block; margin: 0 auto;" />
+  <img src="img/DockerInicio.png" alt="DockerInicio" style="max-width: 400px; display: block; margin: 0 auto;" />
 </div>
 
 <div align="center">
-  <img src="img/DockerCorriendo" alt="DockerCorriendo" style="max-width: 400px; display: block; margin: 0 auto;" />
+  <img src="img/DockerCorriendo.png" alt="DockerCorriendo" style="max-width: 400px; display: block; margin: 0 auto;" />
 </div>
 
 <div align="center">
-  <img src="img/DockerDesktop" alt="DockerDesktop" style="max-width: 400px; display: block; margin: 0 auto;" />
+  <img src="img/DockerDesktop.png" alt="DockerDesktop" style="max-width: 400px; display: block; margin: 0 auto;" />
 </div>
 
  - Implementa un nuevo repositorio `PostgresBlueprintPersistence` que reemplace la versión en memoria.  
@@ -202,12 +202,12 @@ Body:
 }  
 Resultado:  
 <div align="center">
-  <img src="img/PruebaPOST" alt="PruebaPOST" style="max-width: 400px; display: block; margin: 0 auto;" />
+  <img src="img/PruebaPOST.png" alt="PruebaPOST" style="max-width: 400px; display: block; margin: 0 auto;" />
 </div>
   
 Cambio en la BD:  
 <div align="center">
-  <img src="img/PruebaBD" alt="PruebaBD" style="max-width: 400px; display: block; margin: 0 auto;" />
+  <img src="img/PruebaBD.png" alt="PruebaBD" style="max-width: 400px; display: block; margin: 0 auto;" />
 </div>
 
 2)	Obtener todos los blueprints   
@@ -215,7 +215,7 @@ Método: GET
 URL: http://localhost:8080/blueprints   
 Resultado:  
 <div align="center">
-  <img src="img/PruebaGET" alt="PruebaGET" style="max-width: 400px; display: block; margin: 0 auto;" />
+  <img src="img/PruebaGET.png" alt="PruebaGET" style="max-width: 400px; display: block; margin: 0 auto;" />
 </div>  
 
 3)	Obtener los blueprints de un autor.  
@@ -223,7 +223,7 @@ Método: GET
 URL: http://localhost:8080/blueprints/john   
 Respuesta:  
 <div align="center">
-  <img src="img/PruebaGET-john" alt="Prueba-GET-john" style="max-width: 400px; display: block; margin: 0 auto;" />
+  <img src="img/PruebaGET-john.png" alt="Prueba-GET-john" style="max-width: 400px; display: block; margin: 0 auto;" />
 </div>  
 
 4)	Obtener un blueprint específico  
@@ -231,7 +231,7 @@ Método: GET
 URL: http://localhost:8080/blueprints/john/kitchen   
 Respuesta:  
 <div align="center">
-  <img src="img/PruebaGET-Kitchen" alt="Prueba-GET-Kitchen" style="max-width: 400px; display: block; margin: 0 auto;" />
+  <img src="img/PruebaGET-Kitchen.png" alt="Prueba-GET-Kitchen" style="max-width: 400px; display: block; margin: 0 auto;" />
 </div>  
 
 5)	Agregar un punto a un blueprint  
@@ -241,5 +241,5 @@ Body:
 { "x": 3, "y": 3 }  
 Respuesta:   
 <div align="center">
-  <img src="img/Prueba-Points" alt="Prueba-Points" style="max-width: 400px; display: block; margin: 0 auto;" />
+  <img src="img/Prueba-Points.png" alt="Prueba-Points" style="max-width: 400px; display: block; margin: 0 auto;" />
 </div>
