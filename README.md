@@ -122,3 +122,24 @@ src/main/java/edu/eci/arsw/blueprints
 
 - Imagen de contenedor (`spring-boot:build-image`).  
 - Métricas con Actuator.  
+
+---
+# REPORTE DE LABORATORIO
+---
+### INTEGRANTES:  
+      - Laura Alejandra Venegas Piraban  
+      - Sergio Alejandro Idarraga Torres  
+
+### 1. Familiarización con el código base
+- Revisa el paquete `model` con las clases `Blueprint` y `Point`.  
+**Respuesta:**  
+      Lo primero que nos piden revisar es el paquete model que contiene las clases Blueprint y Point, este paquete es el que contiene las entidades principales del dominio. Primero tenemos la clase Point, esta representa un punto en el plano y tiene atributos *x* y *y*. Por otro lado Blueprint representa el dibujo en el plano compuesto por un conjunto de puntos.  
+- Entiende la capa `persistence` con `InMemoryBlueprintPersistence`.  
+**Respuesta:**
+      La capa de persistencia es la que define como se guardan y se obtiene los datos, maneja excepciones si no encuentra un Blueprint y se maneja la lógica para evitar duplicados.  
+      Como principal tenemos una interfaz llamada BlueprintPersistence, esta define los métodos para guardar, consultar y actualizar blueprints. También se definió InMemoryBlueprintPersistence la cual es la implementación concreta de la interfaz, la cual almacena daatos en memoria usando mapas o listas. Logramos observar que no persiste datos a una BD real.  
+- Analiza la capa `services` (`BlueprintsServices`) y el controlador `BlueprintsAPIController`.  
+**Respuestas:**
+      En la capa de services tenemos BlueprintServices acá es donde se aplican reglas de negocio, validaciones, y se invocan filtros si es necesario. Ella maneja operaciones entre la persistencia u los controladores.  
+      Por otro lado tenemos el controlador, en el encontramos BlueprintAPIController que es el controlador REST, este expone los métodos HTTP para que los clientes puedan interactuar con blueprints. Recibe peticiones, llama a los serviocios y retorna las respuestas.  
+      
