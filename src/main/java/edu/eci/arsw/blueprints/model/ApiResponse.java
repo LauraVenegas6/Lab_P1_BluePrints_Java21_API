@@ -20,6 +20,5 @@ public record ApiResponse<T>(int code, String message, T data) {
     }
     
     public static <T> ApiResponse<T> accepted(T data) {
-        return new ApiResponse<>(202, "accepted", data);
-    }
+    return new ApiResponse<>(202, "accepted", data);}
 }
