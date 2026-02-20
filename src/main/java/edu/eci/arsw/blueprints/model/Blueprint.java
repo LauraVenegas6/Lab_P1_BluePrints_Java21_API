@@ -1,15 +1,22 @@
+
 package edu.eci.arsw.blueprints.model;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import jakarta.persistence.*;
+import java.util.*;
 
+@Entity
 public class Blueprint {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private String author;
     private String name;
-    private final List<Point> points = new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Point> points = new ArrayList<>();
+
+    public Blueprint() {}
 
     public Blueprint(String author, String name, List<Point> pts) {
         this.author = author;
@@ -17,11 +24,37 @@ public class Blueprint {
         if (pts != null) points.addAll(pts);
     }
 
-    public String getAuthor() { return author; }
-    public String getName() { return name; }
-    public List<Point> getPoints() { return Collections.unmodifiableList(points); }
+    public Long getId() {
+        return id;
+    }
 
-    public void addPoint(Point p) { points.add(p); }
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public List<Point> getPoints() {
+        return points;
+    }
+
+    public void setPoints(List<Point> points) {
+        this.points = points;
+    }
+
+    public void addPoint(Point p) {
+        points.add(p);
+    }
 
     @Override
     public boolean equals(Object o) {

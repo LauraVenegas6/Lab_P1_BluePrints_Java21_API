@@ -27,3 +27,9 @@ EXPOSE 8080
 
 # Adjust JVM options as needed
 ENTRYPOINT ["java","-jar","/app/app.jar"]
+
+<dependency>
+    <groupId>org.postgresql</groupId>
+    <artifactId>postgresql</artifactId>
+    <version>42.7.3</version>
+</dependency>
