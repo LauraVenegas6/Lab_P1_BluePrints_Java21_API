@@ -243,3 +243,114 @@ Respuesta:
 <div align="center">
   <img src="img/Prueba-Points.png" alt="Prueba-Points" style="max-width: 400px; display: block; margin: 0 auto;" />
 </div>
+
+<div align="center">
+  <img src="img/DBeaver-postgres.png" alt="DBeaver-postgres" style="max-width: 400px; display: block; margin: 0 auto;" />
+</div>
+
+### 3. Buenas prácticas de API REST
+
+La API fue refactorizada para poder cumplir el "estándar" REST: 
+
+- **Path base**: Cambiamos la URI del controlador para poder seguir una buena práctica de nombramiento. 
+
+<div align="center">
+  <img src="img/uriAPI.png" alt="uriAPI" style="max-width: 400px; display: block; margin: 0 auto;" />
+</div>
+
+- **Respuestas Uniformes**: Implementamos la clase genérica ApiResponse, la cual incluye el código, un mensaje descriptivo y los datos encapsulados de la respuesta. 
+
+<div align="center">
+  <img src="img/APIresponse.png" alt="APIresponse" style="max-width: 400px; display: block; margin: 0 auto;" />
+</div>
+
+- **Códigos HTTP Correctos**: Verificamos y utilizamos el correcto uso de los códigos de estado mediante diversas pruebas desde postman: 
+
+  - 200 OK: 
+
+  <div align="center">
+  <img src="img/200OK.png" alt="200OK" style="max-width: 400px; display: block; margin: 0 auto;" />
+</div>
+
+  - 201 Created:
+
+  <div align="center">
+  <img src="img/201Created.png" alt="201Created" style="max-width: 400px; display: block; margin: 0 auto;" />
+</div>
+
+  - 202 Accepted:
+
+  <div align="center">
+  <img src="img/202Accepted.png" alt="202Accepted" style="max-width: 400px; display: block; margin: 0 auto;" />
+</div>
+
+  - 400 Bad Request:
+
+  <div align="center">
+  <img src="img/400BadRequest.png" alt="400BadRequest" style="max-width: 400px; display: block; margin: 0 auto;" />
+</div>
+
+  - 404 Not Found: //IMAGEN 5
+
+  <div align="center">
+  <img src="img/404NotFound.png" alt="404NotFound" style="max-width: 400px; display: block; margin: 0 auto;" />
+</div>
+
+### 4. OpenAPI/Swagger
+
+Documentamos de forma adecuada y estructurada los endpoints expuestos de la API, podemos interactuar con ella desde el navegador de nuestra preferencia con el siguiente link: http://localhost:8080/swagger-ui/index.html#/blueprints-api-controller (Debes de tener en cuenta que el proyecto debe de estar corriendo).
+
+- **Configuración**: Añadimos la dependencia springdoc-openapi-starter-webmvc-ui en su versión 2.6.0 en el archivo pom.xml.
+ <div align="center">
+  <img src="img/dependencia.png" alt="dependencia" style="max-width: 400px; display: block; margin: 0 auto;" />
+</div>
+
+- **Exposición**: La documentación interactiva de Swagger UI se encuentra habilitada y expone visualmente los métodos GET, POST y PUT asociados a la gestión de los planos.  
+
+ <div align="center">
+  <img src="img/swagger.png" alt="swagger" style="max-width: 400px; display: block; margin: 0 auto;" />
+</div>
+
+Después agregamos siguiendo las buenas prácticas de REST con @Operation la documentación de cada endpoint. 
+
+ <div align="center">
+  <img src="img/swaggerDocumentada.png" alt="swaggerDocumentada" style="max-width: 400px; display: block; margin: 0 auto;" />
+</div>
+
+### 5. Filtros de Blueprints
+
+Integramos dos estrategias de filtrado que actúan sobre los puntos de los planos en el momento de la consulta, configurables a través de los perfiles activos de Spring (application.properties):
+
+ <div align="center">
+  <img src="img/usuariosSpring.png" alt="usuariosSpring" style="max-width: 400px; display: block; margin: 0 auto;" />
+</div>
+
+Vamos a hacer una prueba para ver si los filtros con los usuarios si están funcionando, entonces si dejamos comentados los dos usuarios y vamos a realizar una consulta de los datos, nos deben de aparecer tal cual los ingresamos
+
+ <div align="center">
+  <img src="img/pruebaGetS.png" alt="pruebaGetS" style="max-width: 400px; display: block; margin: 0 auto;" />
+</div>
+
+- **RedundancyFilter**: Este filtro se encarga de eliminar puntos duplicados que sean consecutivos. Se activa utilizando el perfil spring.profiles.active=redundancy.
+
+Ahora procedemos a activar uno de los filtros, en este caso vamos a descomentar el usuario de “redundancy” que se encarga de “eliminar” de la consulta los puntos que se ingresaron repetidos. 
+
+ <div align="center">
+  <img src="img/redundancy.png" alt="redundancy" style="max-width: 400px; display: block; margin: 0 auto;" />
+</div>
+
+Y vamos a realizar la misma consulta de la imagen pasada para ver los resultados.
+
+ <div align="center">
+  <img src="img/getRedundancy.png" alt="getRedundancy" style="max-width: 400px; display: block; margin: 0 auto;" />
+</div>
+
+Ahora vamos a probar el otro usuario y realizaremos la misma consulta
+
+- **UndersamplingFilter**: Este filtro reduce la cantidad de datos, conservando solo 1 de cada 2 puntos. Se habilita mediante el perfil spring.profiles.active=undersampling.
+
+ <div align="center">
+  <img src="img/getunder.png" alt="getunder" style="max-width: 400px; display: block; margin: 0 auto;" />
+</div>
+
+- **Sin filtrado**: Si ambos perfiles se encuentran comentados en el archivo de propiedades, el sistema retorna los datos usando el filtro de identidad (no aplica ninguna modificación a los puntos)
